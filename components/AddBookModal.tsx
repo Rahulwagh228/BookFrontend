@@ -72,7 +72,7 @@ const AddBookModal = ({ isOpen, onClose, onSuccess }: AddBookModalProps) => {
               name="title"
               value={form.title}
               onChange={handleChange}
-              placeholder="e.g. Atomic Habits"
+              placeholder="e.g Atomic Habits"
               className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-200 focus:outline-none transition-all"
               required
             />
@@ -85,7 +85,7 @@ const AddBookModal = ({ isOpen, onClose, onSuccess }: AddBookModalProps) => {
               name="author"
               value={form.author}
               onChange={handleChange}
-              placeholder="e.g. James Clear"
+              placeholder="e g. James Clear"
               className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-200 focus:outline-none transition-all"
             />
           </div>
@@ -97,7 +97,7 @@ const AddBookModal = ({ isOpen, onClose, onSuccess }: AddBookModalProps) => {
               name="tags"
               value={form.tags}
               onChange={handleChange}
-              placeholder="e.g. Productivity, Self-help"
+              placeholder=" Productivity, Self-help"
               className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-200 focus:outline-none transition-all"
             />
           </div>

@@ -118,7 +118,7 @@ export default function AuthPage() {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+            className="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-800"
           >
             {isLogin ? "Login" : "Create Account"}
           </button>
@@ -129,7 +129,7 @@ export default function AuthPage() {
           {isLogin ? "Don't have an account?" : "Already have an account?"}
 
           <button
-            className="text-blue-500 ml-1"
+            className="text-gray-500 ml-1"
             onClick={() => setIsLogin(!isLogin)}
           >
             {isLogin ? "Signup" : "Login"}
