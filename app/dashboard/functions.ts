@@ -79,11 +79,13 @@ export const updateBook = async (bookId: string, payload: any) => {
 export const deleteBook = async (bookId: string) => {
   try {
     const { token } = getAuthData();
-    const res = await fetch(`${url}/api/deletebook/${bookId}`, {
-      method: "DELETE",
+    const res = await fetch(`${url}/api/deleteBook`, {
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
-      }
+      },
+      body: JSON.stringify({ id: bookId }),
     });
     const data = await res.json();
     return { ok: res.ok, data };

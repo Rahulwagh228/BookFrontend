@@ -64,7 +64,6 @@ const EditBookModal = ({ isOpen, book, onClose, onSuccess }: EditBookModalProps)
   };
 
   const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete this book?")) return;
     
     setDeleting(true);
     const result = await deleteBook(book._id);
