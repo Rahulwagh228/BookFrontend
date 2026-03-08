@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -11,6 +11,11 @@ export default function AuthPage() {
     email: "",
     password: "",
   });
+
+    const token = localStorage.getItem("Booktoken");
+    if(token){
+        router.push("/");
+    }  
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const handleChange = (e:any) => {
@@ -27,7 +32,7 @@ export default function AuthPage() {
     const endpoint = isLogin
       ? `${API_URL}/auth/login`
       : `${API_URL}/auth/register`;
-      
+
     // const endpoint = isLogin
     //   ? "http://localhost:5000/auth/login"
     //   : "http://localhost:5000/auth/register";
