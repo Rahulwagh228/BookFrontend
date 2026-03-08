@@ -12,6 +12,7 @@ export default function AuthPage() {
     password: "",
   });
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const handleChange = (e:any) => {
     setForm({
       ...form,
@@ -22,9 +23,14 @@ export default function AuthPage() {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
 
+  
     const endpoint = isLogin
-      ? "http://localhost:5000/auth/login"
-      : "http://localhost:5000/auth/register";
+      ? `${API_URL}/auth/login`
+      : `${API_URL}/auth/register`;
+      
+    // const endpoint = isLogin
+    //   ? "http://localhost:5000/auth/login"
+    //   : "http://localhost:5000/auth/register";
 
     try {
       const res = await fetch(endpoint, {
