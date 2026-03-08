@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AddBookModal from '@/components/AddBookModal';
+import EditBookModal from '@/components/EditBookModal';
 import Navbar from '@/components/Navbar';
 import { Plus } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -13,6 +14,8 @@ import BooksTable from '@/components/BooksTable';
 const DashboardPage = () => {
   const router = useRouter();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedBook, setSelectedBook] = useState<any>(null);
   const [books, setBooks] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -38,8 +41,13 @@ const DashboardPage = () => {
     }
   }, [router]);
 
-  const handleBookAdded = () => {
+  const handleBookChange = () => {
     fetchBooks();
+  };
+
+  const handleEdit = (book: any) => {
+    setSelectedBook(book);
+    setIsEditModalOpen(true);
   };
 
   return (
@@ -63,21 +71,19 @@ const DashboardPage = () => {
           </button>
         </div>
 
-        {/* Counter Box */}
+       
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center">
             <span className="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-2">Total Books</span>
             <span className="text-5xl font-extrabold text-gray-900">{totalCount}</span>
           </div>
-          {/* You could add more stat boxes here later (e.g. Reading, Completed) */}
         </div>
 
-        {/* Data Table */}
         <div className="bg-white p-2 rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
           {loading ? (
             <div className="h-40 flex items-center justify-center text-gray-400">Loading your books...</div>
           ) : books.length > 0 ? (
-            <BooksTable rowData={books} />
+            <BooksTable rowData={books} onEdit={handleEdit} />
           ) : (
             <div className="p-12 flex flex-col items-center justify-center text-center">
               <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-4">
@@ -92,7 +98,17 @@ const DashboardPage = () => {
       <AddBookModal 
         isOpen={isAddModalOpen} 
         onClose={() => setIsAddModalOpen(false)} 
-        onSuccess={handleBookAdded}
+        onSuccess={handleBookChange}
+      />
+
+      <EditBookModal
+        isOpen={isEditModalOpen}
+        book={selectedBook}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setSelectedBook(null);
+        }}
+        onSuccess={handleBookChange}
       />
     </div>
   );
@@ -100,3 +116,4 @@ const DashboardPage = () => {
 
 
 export default DashboardPage;
+

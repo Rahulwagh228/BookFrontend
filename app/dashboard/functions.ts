@@ -56,3 +56,39 @@ export const allbook = async () => {
     return { ok: false, error };
   }
 };
+
+export const updateBook = async (bookId: string, payload: any) => {
+  try {
+    const { token } = getAuthData();
+    const res = await fetch(`${url}/api/editBook`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ id: bookId, ...payload }),
+    });
+    const data = await res.json();
+    return { ok: res.ok, data };
+  } catch (error) {
+    console.error("Error updating book:", error);
+    return { ok: false, error };
+  }
+};
+
+export const deleteBook = async (bookId: string) => {
+  try {
+    const { token } = getAuthData();
+    const res = await fetch(`${url}/api/deletebook/${bookId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+    const data = await res.json();
+    return { ok: res.ok, data };
+  } catch (error) {
+    console.error("Error deleting book:", error);
+    return { ok: false, error };
+  }
+};

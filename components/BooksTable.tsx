@@ -8,6 +8,8 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
+import { Edit } from 'lucide-react';
+
 interface Book {
   _id: string;
   title: string;
@@ -19,11 +21,12 @@ interface Book {
 
 interface BooksTableProps {
   rowData: Book[];
+  onEdit: (book: Book) => void;
 }
 
-const BooksTable = ({ rowData }: BooksTableProps) => {
+const BooksTable = ({ rowData, onEdit }: BooksTableProps) => {
   const columnDefs = useMemo<ColDef[]>(() => [
-    { field: 'title', headerName: 'Title', sortable: true, filter: true, flex: 1 },
+    { field: 'title', headerName: 'Title', sortable: true, filter: true, flex: 1.5 },
     { field: 'author', headerName: 'Author', sortable: true, filter: true, flex: 1 },
     { 
       field: 'tags', 
@@ -43,7 +46,23 @@ const BooksTable = ({ rowData }: BooksTableProps) => {
       },
       flex: 1 
     },
-  ], []);
+    {
+      headerName: 'Action',
+      field: '_id' as any,
+      cellRenderer: (params: any) => (
+        <button
+          onClick={() => onEdit(params.data)}
+          className="flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium cursor-pointer py-1 px-2 rounded hover:bg-blue-50 transition-colors"
+        >
+          <Edit size={16} />
+          Edit
+        </button>
+      ),
+      flex: 0.8,
+      sortable: false,
+      filter: false
+    }
+  ], [onEdit]);
 
   const defaultColDef = useMemo(() => ({
     resizable: true,
