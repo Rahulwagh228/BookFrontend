@@ -22,7 +22,7 @@ export default function AuthPage() {
   }, [router]);
 
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const handleChange = (e:any) => {
     setForm({
       ...form,
