@@ -17,7 +17,7 @@ export default function AuthPage() {
     const token = localStorage.getItem("Booktoken");
 
     if (token) {
-      router.push("/");
+      router.push("/dashboard");
     }
   }, [router]);
 
