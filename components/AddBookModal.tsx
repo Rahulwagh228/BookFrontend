@@ -79,7 +79,7 @@ const AddBookModal = ({ isOpen, onClose, onSuccess }: AddBookModalProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Author (Optional)</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Author </label>
             <input
               type="text"
               name="author"
