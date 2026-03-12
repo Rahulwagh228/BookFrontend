@@ -1,9 +1,17 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("Booktoken");
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
     <main className=" bg-white">
       <Navbar />
@@ -19,13 +27,15 @@ export default function Home() {
             
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link
-                  href="/auth"
-                  className="px-8 py-4 bg-gray-600 text-white rounded-2xl font-bold text-lg hover:bg-white hover:text-gray-600 hover:border-2 hover:border-gray-100 hover:transition-all  text-center"
-                >
-                  Login   / Signup
-                  
-                </Link>
+                {!isLoggedIn && (
+                  <Link
+                    href="/auth"
+                    className="px-8 py-4 bg-gray-600 text-white rounded-2xl font-bold text-lg hover:bg-white hover:text-gray-600 hover:border-2 hover:border-gray-100 hover:transition-all  text-center"
+                  >
+                    Login   / Signup
+                    
+                  </Link>
+                )}
                 <Link
                   href="/dashboard"
                   className="px-8 py-4 bg-white text-gray-600 border-2 border-gray-100 rounded-2xl font-bold text-lg hover:bg-gray-600 hover:text-white hover:transion-colours transition-all text-center flex items-center justify-center gap-2"
